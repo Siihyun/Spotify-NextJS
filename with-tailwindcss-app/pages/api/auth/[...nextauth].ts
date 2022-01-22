@@ -72,11 +72,3 @@ export default NextAuth({
     },
   },
 });
-
-interface TestSession extends Record<string, unknown> {
-  user?: {
-    name?: string | null;
-    email?: string | null;
-    image?: string | null;
-  };
-}
