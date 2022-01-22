@@ -7,12 +7,32 @@ import {
   RssIcon,
 } from '@heroicons/react/outline';
 import { signOut, useSession } from 'next-auth/react';
+import { useState, useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import albumsState from '../atoms/albums';
+import useSpotify from '../hooks/useSpotify';
 
 function Sidebar() {
+  const spotifyApi = useSpotify();
+  const IU_ALBUM_ID = '3HqSLMAZ3g3d5poNaI7GOU';
   const { data: session, status } = useSession();
-  console.log('session is : ', session);
+  const [albums, setAlbums] = useState<any>([]);
+  const [albumInfo, setAlbumInfo] = useRecoilState(albumsState);
+
+  const getAlbums = async (albumId: string) => {
+    const data = await spotifyApi.getArtistAlbums(albumId);
+    setAlbums(data.body.items);
+    console.log(data);
+  };
+
+  useEffect(() => {
+    if (spotifyApi.getAccessToken()) {
+      getAlbums(IU_ALBUM_ID);
+    }
+  }, [session, spotifyApi]);
+
   return (
-    <section className='text-gray-500 p-5 text-sm border-r border-gray-900'>
+    <section className='text-gray-500 p-5 text-sm border-r border-gray-900 overflow-y-scroll h-screen'>
       <div className='space-y-4'>
         <button
           className='flex items-center space-x-2 hover:text-white'
@@ -49,15 +69,23 @@ function Sidebar() {
         <hr className='border-t-[0.1]px border-gray-900' />
 
         {/* Playlist.. */}
-        <p className='cursor-pointer hover:text-white'>Playlist name...</p>
-        <p className='cursor-pointer hover:text-white'>Playlist name...</p>
-        <p className='cursor-pointer hover:text-white'>Playlist name...</p>
-        <p className='cursor-pointer hover:text-white'>Playlist name...</p>
-        <p className='cursor-pointer hover:text-white'>Playlist name...</p>
-        <p className='cursor-pointer hover:text-white'>Playlist name...</p>
-        <p className='cursor-pointer hover:text-white'>Playlist name...</p>
-        <p className='cursor-pointer hover:text-white'>Playlist name...</p>
-        <p className='cursor-pointer hover:text-white'>Playlist name...</p>
+        <ul>
+          {albums.map((album: any) => (
+            <li
+              key={album.id}
+              onClick={() => {
+                setAlbumInfo({
+                  name: album.name,
+                  id: album.id,
+                  thumbnail: album.images?.[0]?.url,
+                });
+              }}
+              className='cursor-pointer hover:text-white p-1'
+            >
+              {album.name}
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

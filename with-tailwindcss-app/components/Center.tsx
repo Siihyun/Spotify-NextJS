@@ -2,6 +2,9 @@ import { ChevronDownIcon } from '@heroicons/react/outline';
 import { useSession } from 'next-auth/react';
 import React, { useState, useEffect } from 'react';
 import { shuffle } from 'lodash';
+import { useRecoilValue } from 'recoil';
+import albumsState from '../atoms/albums';
+import spotifyApi from '../lib/spotify';
 
 const colors = [
   'from-indigo-500',
@@ -18,10 +21,24 @@ function Center() {
     'https://media.vlpt.us/images/seeh_h/profile/6b7bfde5-b67c-4665-a2e1-a308e8de2059/tt.PNG?w=240';
 
   const [color, setColor] = useState<string>('');
+  const [tracks, setTracks] = useState<any>();
+  const albumInfo = useRecoilValue(albumsState);
+
+  const getTracks = async () => {
+    const tracks = await spotifyApi.getAlbumTracks(albumInfo.id);
+    setTracks(tracks.body);
+    console.log(tracks.body);
+  };
 
   useEffect(() => {
     setColor(shuffle(colors).pop()!);
-  }, []);
+  }, [albumInfo]);
+
+  useEffect(() => {
+    if (spotifyApi.getAccessToken()) {
+      getTracks();
+    }
+  }, [albumInfo]);
 
   return (
     <div className='flex-grow'>
@@ -38,10 +55,22 @@ function Center() {
       </header>
 
       <section
-        className={`flex items-end space-x-7 bg-gradient-to-b to-black ${color} h-80 text-white p-8`}
+        className={`flex items-end space-x-3 bg-gradient-to-b to-black ${color} h-80 text-white p-8`}
       >
-        <h1>hello</h1>
+        <img
+          className='w-44 h-44 shadow-2xl'
+          src={albumInfo.thumbnail}
+          alt='album thumbnail'
+        />
+        <div>
+          <p>Song of IU</p>
+          <h1 className='text-2xl md:text-3xl xl:text-5xl font-bold'>
+            {albumInfo.name}
+          </h1>
+        </div>
       </section>
+
+      <div>aa</div>
     </div>
   );
 }
