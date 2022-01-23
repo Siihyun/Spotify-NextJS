@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
 
-const albumsState = atom({
-  key: 'albumIdState',
+const albumState = atom({
+  key: 'albumState',
   default: {
     name: `IU 5th Album 'LILAC'`,
     id: '01dPJcwyht77brL4JQiR8R',
@@ -10,4 +10,8 @@ const albumsState = atom({
   },
 });
 
-export default albumsState;
+// const trackState = atom({
+//   key: 'trackState',
+// });
+
+export { albumState };
