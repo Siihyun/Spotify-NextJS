@@ -5,15 +5,7 @@ import { shuffle } from 'lodash';
 import { useRecoilValue } from 'recoil';
 import { albumState } from '../atoms/albums';
 import Songs from './Songs';
-
-const colors = [
-  'from-indigo-500',
-  'from-blue-500',
-  'from-green-500',
-  'from-red-500',
-  'from-pink-500',
-  'from-purple-500',
-];
+import colors from '../lib/color';
 
 function Center() {
   const { data: session } = useSession();
@@ -32,7 +24,7 @@ function Center() {
       <header className='absolute top-5 right-8'>
         <div
           className='flex items-center bg-black text-white space-x-3 opacity-90 hover:opacity-80 cursor-pointer rounded-full p-1 pr-2'
-          onClick={signOut}
+          onClick={() => signOut()}
         >
           <img
             className='rounded-full w-10 h-10'
@@ -45,7 +37,7 @@ function Center() {
       </header>
 
       <section
-        className={`flex items-end space-x-3 bg-gradient-to-b to-black ${color} h-80 text-white p-8`}
+        className={`flex items-end space-x-3 bg-gradient-to-b ${color} to-black  h-80 text-white p-8`}
       >
         <img
           className='w-44 h-44 shadow-2xl'
