@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
-import { albumState } from '../atoms/albums';
-import useSpotify from '../hooks/useSpotify';
+import { albumState } from '@/atoms/albums';
+import useSpotify from '@/hooks/useSpotify';
 import Song from './Song';
 
 function Songs() {
@@ -11,7 +11,6 @@ function Songs() {
 
   const getTracks = async () => {
     const tracks = await spotifyApi.getAlbumTracks(albumInfo.id);
-    console.log(tracks.body.items);
     setTracks(tracks.body.items);
   };
 

@@ -3,14 +3,14 @@ import {
   SearchIcon,
   LibraryIcon,
   PlusCircleIcon,
-  HeartIcon,
   RssIcon,
 } from '@heroicons/react/outline';
+import { HeartIcon } from '@heroicons/react/solid';
 import { useSession } from 'next-auth/react';
 import { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { albumState } from '../atoms/albums';
-import useSpotify from '../hooks/useSpotify';
+import { albumState } from '@/atoms/albums';
+import useSpotify from '@/hooks/useSpotify';
 
 function Sidebar() {
   const spotifyApi = useSpotify();

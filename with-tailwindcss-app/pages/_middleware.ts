@@ -1,5 +1,5 @@
 import { getToken } from 'next-auth/jwt';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
 export async function middleware(req: any) {
   // middleware will run on every routing between pages

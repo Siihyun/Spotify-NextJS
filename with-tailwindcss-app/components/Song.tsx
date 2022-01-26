@@ -1,8 +1,8 @@
 import React from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { albumState } from '../atoms/albums';
-import { currentTrackState, isPlayingState } from '../atoms/track';
-import { millisToMinutesAndSeconds } from '../lib/time';
+import { albumState } from '@/atoms/albums';
+import { currentTrackState, isPlayingState } from '@/atoms/track';
+import { millisToMinutesAndSeconds } from '@/lib/time';
 
 interface Props {
   order: number;

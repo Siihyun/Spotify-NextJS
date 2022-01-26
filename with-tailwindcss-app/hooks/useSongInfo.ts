@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { currentTrackState } from '../atoms/track';
+import { currentTrackState } from '@/atoms/track';
 import useSpotify from './useSpotify';
 
 function useSongInfo() {

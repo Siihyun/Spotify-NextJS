@@ -3,9 +3,9 @@ import { signOut, useSession } from 'next-auth/react';
 import React, { useState, useEffect } from 'react';
 import { shuffle } from 'lodash';
 import { useRecoilValue } from 'recoil';
-import { albumState } from '../atoms/albums';
+import { albumState } from '@/atoms/albums';
 import Songs from './Songs';
-import colors from '../lib/color';
+import colors from '@/lib/color';
 
 function Center() {
   const { data: session } = useSession();

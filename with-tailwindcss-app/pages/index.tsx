@@ -1,10 +1,10 @@
 import { GetServerSidePropsContext } from 'next';
 import { getSession } from 'next-auth/react';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { currentTrackState } from '../atoms/track';
-import Center from '../components/Center';
-import Player from '../components/Player';
-import Sidebar from '../components/Sidebar';
+import { useRecoilValue } from 'recoil';
+import { currentTrackState } from '@/atoms/track';
+import Center from '@/components/Center';
+import Player from '@/components/Player';
+import Sidebar from '@/components/Sidebar';
 
 export default function Home() {
   const currentTrackId = useRecoilValue(currentTrackState);

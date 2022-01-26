@@ -10,8 +10,8 @@ import {
 import { VolumeUpIcon as VolumeDownIcon } from '@heroicons/react/outline';
 import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { isPlayingState } from '../atoms/track';
-import useSongInfo from '../hooks/useSongInfo';
+import { isPlayingState } from '@/atoms/track';
+import useSongInfo from '@/hooks/useSongInfo';
 
 function Player() {
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
