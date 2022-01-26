@@ -9,20 +9,19 @@ import {
 import { signOut, useSession } from 'next-auth/react';
 import { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import albumsState from '../atoms/albums';
+import { albumState } from '../atoms/albums';
 import useSpotify from '../hooks/useSpotify';
 
 function Sidebar() {
   const spotifyApi = useSpotify();
   const IU_ALBUM_ID = '3HqSLMAZ3g3d5poNaI7GOU';
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const [albums, setAlbums] = useState<any>([]);
-  const [albumInfo, setAlbumInfo] = useRecoilState(albumsState);
+  const [albumInfo, setAlbumInfo] = useRecoilState(albumState);
 
   const getAlbums = async (albumId: string) => {
     const data = await spotifyApi.getArtistAlbums(albumId);
     setAlbums(data.body.items);
-    console.log(data);
   };
 
   useEffect(() => {
@@ -32,7 +31,10 @@ function Sidebar() {
   }, [session, spotifyApi]);
 
   return (
-    <section className='text-gray-500 p-5 text-sm border-r border-gray-900 overflow-y-scroll h-screen'>
+    <section
+      className='text-gray-500 p-5 text-xs lg:text-sm border-r border-gray-900 overflow-y-scroll scrollbar-hide h-screen 
+      sm:max-w-[12rem] lg:max-w-[15rem] hidden md:flex pb-36'
+    >
       <div className='space-y-4'>
         <button className='flex items-center space-x-2 hover:text-white'>
           <HomeIcon className='h-5 w-5' />
