@@ -20,7 +20,6 @@ function useSongInfo() {
           },
         }
       ).then((res) => res.json());
-      console.log(trackInfo);
       setSongInfo(trackInfo);
     }
   };

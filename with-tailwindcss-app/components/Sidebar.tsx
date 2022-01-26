@@ -6,7 +6,7 @@ import {
   HeartIcon,
   RssIcon,
 } from '@heroicons/react/outline';
-import { signOut, useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { albumState } from '../atoms/albums';
@@ -14,9 +14,9 @@ import useSpotify from '../hooks/useSpotify';
 
 function Sidebar() {
   const spotifyApi = useSpotify();
-  const IU_ALBUM_ID = '3HqSLMAZ3g3d5poNaI7GOU';
+  const IU_SINGER_ID = '3HqSLMAZ3g3d5poNaI7GOU';
   const { data: session } = useSession();
-  const [albums, setAlbums] = useState<any>([]);
+  const [albums, setAlbums] = useState<SpotifyApi.AlbumObjectSimplified[]>([]);
   const [albumInfo, setAlbumInfo] = useRecoilState(albumState);
 
   const getAlbums = async (albumId: string) => {
@@ -26,7 +26,7 @@ function Sidebar() {
 
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
-      getAlbums(IU_ALBUM_ID);
+      getAlbums(IU_SINGER_ID);
     }
   }, [session, spotifyApi]);
 
@@ -66,7 +66,7 @@ function Sidebar() {
 
         {/* Playlist.. */}
         <ul>
-          {albums.map((album: any) => (
+          {albums.map((album) => (
             <li
               key={album.id}
               onClick={() => {
