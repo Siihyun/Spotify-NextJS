@@ -10,8 +10,4 @@ const albumState = atom({
   },
 });
 
-// const trackState = atom({
-//   key: 'trackState',
-// });
-
 export { albumState };
