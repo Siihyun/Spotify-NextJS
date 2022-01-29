@@ -5,7 +5,16 @@ import { shuffle } from 'lodash';
 import { useRecoilValue } from 'recoil';
 import { albumState } from '@/atoms/albums';
 import Songs from './Songs';
-import colors from '@/lib/color';
+//import colors from '@/lib/color';
+
+const colors = [
+  'from-indigo-500',
+  'from-blue-500',
+  'from-green-500',
+  'from-red-500',
+  'from-pink-500',
+  'from-purple-500',
+];
 
 function Center() {
   const { data: session } = useSession();
